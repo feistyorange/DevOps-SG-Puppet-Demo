@@ -10,7 +10,7 @@ service { "lighttpd":
 
 file { "/var/www":
   ensure => directory,
-  before => User["${me}"],
+  before => File["/var/www/index.htm"],
 }
 
 file { "/etc/lighttpd/lighttpd.conf":
