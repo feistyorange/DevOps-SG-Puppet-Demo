@@ -8,8 +8,14 @@ service { "lighttpd":
   require => Package["lighttpd"],
 }
 
+file { "/var/www":
+  ensure => directory,
+  before => User["${me}"],
+}
+
 file { "/etc/lighttpd/lighttpd.conf":
-	source => "puppet:///modules/devops-sg-demo/lighttpd.conf"
+	source => "puppet:///modules/devops-sg-demo/lighttpd.conf",
+	notify => Service['lighttpd'],
 }
 
 file { "/var/www/index.htm":
